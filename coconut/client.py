@@ -120,6 +120,7 @@ async def process_sr(client, message, blizz_id, user):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((config.OASIS_HOSTNAME, config.OASIS_PORT))
+        s.sendall('pc\n'.format(blizz_id).encode())
         s.sendall('{}\n'.format(blizz_id).encode())
         data = s.recv(4096).decode().strip()
         s.close()
